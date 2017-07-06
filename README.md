@@ -25,7 +25,7 @@ python src/main/python/initialize.py”
 
 To run the program: 
 ```bash
-python controller.py
+python src/main/python/controller.py
 ```
 This command will generate a raw data file named `sensor_info.txt`
 > NOTE: this file gets written over each time the controller is called, so be sure to copy this file over if it contains good data

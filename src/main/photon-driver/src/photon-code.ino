@@ -3,19 +3,22 @@
 boolean commonAnode = false;
 char szInfo[128];
 Adafruit_TCS34725 tcs = Adafruit_TCS34725(TCS34725_INTEGRATIONTIME_50MS, TCS34725_GAIN_4X);
-boolean missing_sensor = false;
 
 int white = A5;
 int red = A4;
 int freq = 1000;
 
+// getCoreID was copied from the community forum user dermotos
+// https://community.particle.io/t/device-id-stored-in-core/2647/8
 String getCoreID()
 {
   String coreIdentifier = "";
-  char id[12];
-  memcpy(id, (char *)ID1, 12);
+  int maxIDlength = 12;
+
+  char id[maxIDlength];
+  memcpy(id, (char *)ID1, maxIDlength);
   char hex_digit;
-  for (int i = 0; i < 12; ++i)
+  for (int i = 0; i < maxIDlength; ++i)
   {
     hex_digit = 48 + (id[i] >> 4);
     if (57 < hex_digit)
@@ -43,31 +46,30 @@ void sensorHandler(const char *event, const char *data) {
     sprintf(szInfo, "lux = %d", (int)lux_value);
 
     Spark.publish("colorinfo", szInfo);
-    Particle.process();
+    Particle.process(); // update the cloud
   }
 }
 
 void ledHandler(const char* event, const char* data) {
   std::string str_data = std::string(data);
   std::string led_on = "led_on";
-  if (!str_data.compare(led_on)) {
-    analogWrite(white, 255, freq);
+  if (!str_data.compare(led_on)) { // check if the event's data is "led on"
+    analogWrite(white, 255, freq); // turn LED on
   } else {
-    analogWrite(white, 0, freq);
+    analogWrite(white, 0, freq); // turn LED off
   }
 }
 
 void setup() {
   Particle.publish("flashed");
   if (tcs.begin()) {
-      missing_sensor = false;
       pinMode(white, OUTPUT);
-      pinMode(red, OUTPUT);
       Serial.begin(9600);
       Particle.subscribe("capture_sensors", sensorHandler);
       Particle.subscribe(getCoreID(), ledHandler);
   } else {
-      missing_sensor = true;
       Particle.publish("fatal","missing sensor");
+      pinMode(red, OUTPUT);
+      analogWrite(red, 255, freq); // makes it clear that something is wrong
   }
 }

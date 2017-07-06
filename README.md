@@ -1,10 +1,10 @@
 # photon
 This system collects data from the Photon matrix. It can take data from any number of sensors specified. The current setup turns on each LED in succession and captures sensor reading from all sensors simultaneously. Sensor data is then written to a file on your local computer.
 
-## Requirements:
-Bash shell (for Windows, you need to install Cygwin)
-Python 3.5.2 or higher
-Particle CLI
+### Requirements:
+* Bash shell (for Windows, you need to install Cygwin)
+* Python 3.5.2 or higher
+* Particle CLI
 
 
 ## First Time Use:

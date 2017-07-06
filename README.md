@@ -14,9 +14,9 @@ cd /path/to/photons/
 chmod +x *.sh
 ```
 Flash all the photons:
-Open `active_photons.txt` and make sure the file contains the names of photons you are using
+Open `src/main/config/active_photons.txt` and make sure the file contains the names of photons you are using
 ```bash
-python initialize.py”
+python src/main/python/initialize.py”
 ```
 
 ## Usage:
@@ -30,13 +30,13 @@ This command will generate a raw data file named `sensor_info.txt`
 
 To format raw_output into convenient text file:
 ```bash
-python parse_data.py
+python src/main/python/parse_data.py
 ```
 This command takes the raw data from `sensor_info.txt` and generates a formatted file named `output.txt`
 > NOTE: this file gets written over each time the parse_data.py is called, so be sure to copy this file over if it contains good data
 
 To re-flash the photons:
 ```bash
-python initialize.py
+python src/main/python/initialize.py
 ```
 

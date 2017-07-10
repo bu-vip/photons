@@ -13,7 +13,7 @@ The system contains a local computer and an array of photons boards. Each photon
 Make sure the bash files are executable:
 ```bash
 cd /path/to/photons/
-chmod +x *.sh
+chmod +x src/main/bash/*.sh
 ```
 Flash all the photons:
 Open `src/main/config/active_photons.txt` and make sure the file contains the names of photons you are using

@@ -18,7 +18,7 @@ chmod +x src/main/bash/*.sh
 Flash all the photons:
 Open `src/main/config/active_photons.txt` and make sure the file contains the names of photons you are using
 ```bash
-python src/main/python/initialize.py”
+python src/main/python/initialize.py
 ```
 
 ## Usage:
@@ -27,15 +27,8 @@ python src/main/python/initialize.py”
 ```bash
 python src/main/python/controller.py
 ```
-This command will generate a raw data file named `sensor_info.txt`
-> NOTE: this file gets written over each time the controller is called, so be sure to copy this file over if it contains good data
-
-#### To format raw_output into convenient text file:
-```bash
-python src/main/python/parse_data.py
-```
-This command takes the raw data from `sensor_info.txt` and generates a formatted file named `output.txt`
-> NOTE: this file gets written over each time the parse_data.py is called, so be sure to copy this file over if it contains good data
+This command will generate a formatted data file named `output.txt`. A raw data file named `sensor_info.txt` is also generated, but is used only for debugging purposes.
+> NOTE: these file gets written over each time the controller is called, so be sure to copy this file over if it contains good data. 
 
 #### To re-flash the photons:
 ```bash

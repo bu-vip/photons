@@ -42,6 +42,39 @@ def parseRawSensorData():
 def formatSensorData():
     output_file = "output.txt"
     file = open(output_file,"w")
+    light_sources = []
+    light_sources.append("bg")
+    line = "    "
+    for device in devices:
+        light_sources.append(device)
+        line += device + "   "
+    line += "\n"
+    file.write(line)
+    for i in range(0,len(light_sources)):
+        line = light_sources[i] + "  "
+        for j in range(0,number_of_readings_per_device):
+            for device in devices:
+                line += (device_stats[device_ids[device]][number_of_readings_per_device*i+j]) + "  "
+            line += "\n"
+            file.write(line)
+            line = "    "
+            #reading_count = 0
+            #if (device_ids[device] in device_stats.keys()): # check if the sensor is one of the active photons
+            #    for value in device_stats[device_ids[device]]:
+            #        line += value + " "
+            #        reading_count += 1
+            #        if (reading_count == number_of_readings_per_device):
+            #            reading_count = 0
+            #            line += "  "
+        line += "\n"
+        file.write(line)
+    file.close()
+
+# formats data in a long matrix
+# this is the old version of the above function
+def formatSensorDatalengthwise():
+    output_file = "output.txt"
+    file = open(output_file,"w")
     line = "   "
     line += "background    "
     for device in devices:
@@ -52,7 +85,7 @@ def formatSensorData():
         line = device + " "
         reading_count = 0
         for value in device_stats[device_ids[device]]:
-            line += value + " "
+            line += value + "  "
             reading_count += 1
             if (reading_count == number_of_readings_per_device):
                 reading_count = 0
@@ -61,8 +94,19 @@ def formatSensorData():
         file.write(line)
     file.close()
 
-getActiveDevices()
-matchNamestoID()
-parseRawSensorData()
-formatSensorData()
 
+def generateOutput():
+    matchNamestoID()
+    getActiveDevices()
+    parseRawSensorData()
+    formatSensorData()
+
+# prints output.txt to command line
+def debugger():
+    output_file = "output.txt"
+    file = open(output_file,"r")
+    data = file.read()
+    print(data)
+
+if __name__ == "__main__":
+    generateOutput()

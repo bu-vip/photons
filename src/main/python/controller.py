@@ -1,6 +1,7 @@
 import os
 import subprocess
 import time
+import parse_data
 
 number_of_readings_per_device = 4
 
@@ -74,10 +75,12 @@ for device in devices:
     timer = 0
     expected_lines += len(devices)*number_of_readings_per_device
     if (not all_sensor_data_arrived(expected_lines)):
-        print("not all sensor readings were received. Are you sure all photons are connected?")
+        print("not all sensor readings were received. Are you sure all photons are connected and initialized?")
         exit(1)
 
     turnLEDoff()
+
+parse_data.generateOutput()
 
 
 exit(0)

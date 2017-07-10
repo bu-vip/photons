@@ -34,6 +34,10 @@ String getCoreID()
  return coreIdentifier;
 }
 
+void pingHandler(const char *event, const char *data) {
+  Spark.publish("hereiam");
+}
+
 void sensorHandler(const char *event, const char *data) {
   uint16_t TCS_clear, TCS_red, TCS_green, TCS_blue;
   for (int j = 0; j <= 3; j++) {
@@ -76,6 +80,7 @@ void setup() {
       pinMode(green, OUTPUT);
       pinMode(blue, OUTPUT);
       Serial.begin(9600);
+      Particle.subscribe("find_all_photons",pingHandler);
       Particle.subscribe("capture_sensors", sensorHandler);
       Particle.subscribe(getCoreID(), ledHandler);
   } else {

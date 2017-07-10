@@ -5,7 +5,7 @@ import parse_data
 
 number_of_readings_per_device = 4
 
-
+all_active_devs = 0
 devices = []
 device_ids = dict()
 
@@ -14,6 +14,15 @@ def getActiveDevices():
     file = open(active_file,"r")
     for line in file:
         devices.append(line[:-1])
+
+def findAllDevices():
+    listenforPhotons = "./src/main/bash/log_photons.sh"
+    subprocess.Popen(listenforPhotons)
+    ping_all = "./src/main/bash/ping_all.sh"
+    os.system(ping_all)
+    time.sleep(2)
+    all_active_devs = int(os.popen("wc -l < log_photons.txt").read()) - 2
+    os.system("rm log_photons.txt")
 
 def getIds():
     id_file = "src/main/config/photon_ids.txt"
@@ -50,6 +59,7 @@ def all_sensor_data_arrived(expected_lines):
 os.system("rm -rf sensor_info.txt")
 
 getActiveDevices()
+findAllDevices()
 getIds()
 
 start_sensor_data_listener()
@@ -57,7 +67,7 @@ start_sensor_data_listener()
 # tell photons to get background reading
 os.system("./src/main/bash/capture_sensors.sh")
 
-expected_lines = 2+len(devices)*number_of_readings_per_device
+expected_lines = 2+all_active_devs*number_of_readings_per_device
 if (not all_sensor_data_arrived(expected_lines)):
     print("not all sensor readings were received. Are you sure all photons are connected?")
     exit(1)
@@ -73,7 +83,7 @@ for device in devices:
 
     # wait until all sensor readings have arrived
     timer = 0
-    expected_lines += len(devices)*number_of_readings_per_device
+    expected_lines += all_active_devs*number_of_readings_per_device
     if (not all_sensor_data_arrived(expected_lines)):
         print("not all sensor readings were received. Are you sure all photons are connected and initialized?")
         exit(1)

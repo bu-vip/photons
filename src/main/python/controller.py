@@ -5,7 +5,6 @@ import parse_data
 
 number_of_readings_per_device = 4
 
-all_active_devs = 0
 devices = []
 device_ids = dict()
 
@@ -14,15 +13,6 @@ def getActiveDevices():
     file = open(active_file,"r")
     for line in file:
         devices.append(line[:-1])
-
-def findAllDevices():
-    listenforPhotons = "./src/main/bash/log_photons.sh"
-    subprocess.Popen(listenforPhotons)
-    ping_all = "./src/main/bash/ping_all.sh"
-    os.system(ping_all)
-    time.sleep(2)
-    all_active_devs = int(os.popen("wc -l < log_photons.txt").read()) - 2
-    os.system("rm log_photons.txt")
 
 def getIds():
     id_file = "src/main/config/photon_ids.txt"
@@ -41,6 +31,10 @@ def turnLEDoff():
     toggle_led_command = "./src/main/bash/toggle_led.sh" + ' ' + device_id + ' ' + "off"
     os.system(toggle_led_command)
 
+def turn_all_off():
+    turn_all_off_command = "./src/main/bash/turn_all_off.sh"
+    os.system(turn_all_off_command);
+
 def start_sensor_data_listener():
     # start background process to log all incoming sensor data
     logging_command = "./src/main/bash/log_colorinfo.sh"
@@ -51,7 +45,7 @@ def all_sensor_data_arrived(expected_lines):
     while(int(os.popen("wc -l < sensor_info.txt").read()) < expected_lines):
         time.sleep(.05)
         timer = timer + 1
-        if (timer > 40): # wait for data for 2 secs
+        if (timer > 80): # wait for data for 4 secs
             return 0
     return 1
 
@@ -59,15 +53,16 @@ def all_sensor_data_arrived(expected_lines):
 os.system("rm -rf sensor_info.txt")
 
 getActiveDevices()
-findAllDevices()
 getIds()
+
+turn_all_off()
 
 start_sensor_data_listener()
 
 # tell photons to get background reading
 os.system("./src/main/bash/capture_sensors.sh")
 
-expected_lines = 2+all_active_devs*number_of_readings_per_device
+expected_lines = 2 + len(devices)*number_of_readings_per_device
 if (not all_sensor_data_arrived(expected_lines)):
     print("not all sensor readings were received. Are you sure all photons are connected?")
     exit(1)
@@ -83,7 +78,8 @@ for device in devices:
 
     # wait until all sensor readings have arrived
     timer = 0
-    expected_lines += all_active_devs*number_of_readings_per_device
+    expected_lines = expected_lines + len(devices)*number_of_readings_per_device
+    print(expected_lines)
     if (not all_sensor_data_arrived(expected_lines)):
         print("not all sensor readings were received. Are you sure all photons are connected and initialized?")
         exit(1)

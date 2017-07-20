@@ -1,4 +1,4 @@
 #!/bin/bash
 source ~/.profile
-particle publish capture_sensors
+particle publish all_photons capture_sensor
 

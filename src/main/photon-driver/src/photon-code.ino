@@ -34,11 +34,7 @@ String getCoreID()
  return coreIdentifier;
 }
 
-void pingHandler(const char *event, const char *data) {
-  Spark.publish("hereiam");
-}
-
-void sensorHandler(const char *event, const char *data) {
+void captureSensor() {
   uint16_t TCS_clear, TCS_red, TCS_green, TCS_blue;
   for (int j = 0; j <= 3; j++) {
     tcs.setInterrupt(false);      // turn on LED
@@ -56,19 +52,36 @@ void sensorHandler(const char *event, const char *data) {
   }
 }
 
-void ledHandler(const char* event, const char* data) {
-  std::string str_data = std::string(data);
-  std::string led_on = "led_on";
-  if (!str_data.compare(led_on)) { // check if the event's data is "led on"
+void ledOn() {
     analogWrite(white, 255, freq); // turn LED on
     analogWrite(red, 255, freq);
     analogWrite(green, 255, freq);
     analogWrite(blue, 255, freq);
+}
+
+void ledOff() {
+  analogWrite(white, 0, freq); // turn LED off
+  analogWrite(red, 0, freq);
+  analogWrite(green, 0, freq);
+  analogWrite(blue, 0, freq);
+}
+
+void cloudHandler(const char* event, const char* data) {
+  const std::string str_data = std::string(data);
+  const std::string led_on = "led_on";
+  const std::string led_off = "led_off";
+  const std::string capture_sensors = "capture_sensor";
+  const std::string ping = "ping";
+  if (!str_data.compare(led_on)) {
+    ledOn();
+  } else if (!str_data.compare(led_off)) {
+    ledOff();
+  } else if (!str_data.compare(capture_sensors)) {
+    captureSensor();
+  } else if (!str_data.compare(ping)) {
+    Particle.publish("hereiam", getCoreID());
   } else {
-    analogWrite(white, 0, freq); // turn LED off
-    analogWrite(red, 0, freq);
-    analogWrite(green, 0, freq);
-    analogWrite(blue, 0, freq);
+    Particle.publish("error", "published command could not be interpreted");
   }
 }
 
@@ -80,9 +93,8 @@ void setup() {
       pinMode(green, OUTPUT);
       pinMode(blue, OUTPUT);
       Serial.begin(9600);
-      Particle.subscribe("find_all_photons",pingHandler);
-      Particle.subscribe("capture_sensors", sensorHandler);
-      Particle.subscribe(getCoreID(), ledHandler);
+      Particle.subscribe(getCoreID(), cloudHandler);
+      Particle.subscribe("all_photons", cloudHandler);
   } else {
       Particle.publish("fatal","missing sensor");
       pinMode(red, OUTPUT);

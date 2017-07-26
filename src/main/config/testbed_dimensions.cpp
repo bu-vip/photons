@@ -45,7 +45,7 @@ const int row_spacing = 504;
 const int num_rows = 3;
 const int num_cols = 3;
 static const Position sensor_distance_from_photon_origin = Position(-10,0,0);
-static const Position source_distance_from_photon_origin = Position(30,60,0);
+static const Position source_distance_from_photon_origin = Position(30,-60,0);
 
 
 Position operator+(Position one, const Position two) {
@@ -167,7 +167,7 @@ class Object {
 };
 
 int main() {
-  const int matrix_height = 675;
+  const int matrix_height = 702;
   const int matrix_x_origin = 80;
   const int matrix_y_origin = 330;
   Matrix m(Position( matrix_x_origin, matrix_y_origin, matrix_height));
@@ -180,7 +180,7 @@ int main() {
   Floor f(global_origin, floor_width, floor_length);
   f.print();
 
-  Position object_position = Position(1400,100,0);
+  Position object_position = Position(453,648,0);
   const int object_width = 258;
   const int object_height = 511;
   Object o(object_position, object_width, object_height);

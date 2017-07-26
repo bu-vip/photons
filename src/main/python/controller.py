@@ -4,6 +4,7 @@ import time
 import parse_data
 
 number_of_readings_per_device = 4
+expected_lines = 0
 
 devices = []
 device_ids = dict()
@@ -24,12 +25,16 @@ def getIds():
         device_ids[device_name] = core_id
 
 def turnLEDon():
+    time.sleep(.2)
     toggle_led_command = "./src/main/bash/toggle_led.sh" + ' ' + device_id + ' ' + "on"
     os.system(toggle_led_command)
+    time.sleep(.2)
 
 def turnLEDoff():
+    time.sleep(.2)
     toggle_led_command = "./src/main/bash/toggle_led.sh" + ' ' + device_id + ' ' + "off"
     os.system(toggle_led_command)
+    time.sleep(.2)
 
 def turn_all_off():
     turn_all_off_command = "./src/main/bash/turn_all_off.sh"
@@ -40,53 +45,68 @@ def start_sensor_data_listener():
     logging_command = "./src/main/bash/log_colorinfo.sh"
     subprocess.Popen(logging_command)
 
-def all_sensor_data_arrived(expected_lines):
-    timer = 0
-    while(int(os.popen("wc -l < sensor_info.txt").read()) < expected_lines):
-        time.sleep(.05)
-        timer = timer + 1
-        if (timer > 80): # wait for data for 4 secs
-            return 0
-    return 1
-
-
-os.system("rm -rf sensor_info.txt")
-
-getActiveDevices()
-getIds()
-
-turn_all_off()
-
-start_sensor_data_listener()
-
-# tell photons to get background reading
-os.system("./src/main/bash/capture_sensors.sh")
-
-expected_lines = 2 + len(devices)*number_of_readings_per_device
-if (not all_sensor_data_arrived(expected_lines)):
-    print("not all sensor readings were received. Are you sure all photons are connected?")
-    exit(1)
-
-
-for device in devices:
-    device_id = device_ids[device]
-
-    turnLEDon()
-
+def capture_sensor_data(expected_lines):
     #tell photons to capture sensor data
     os.system("./src/main/bash/capture_sensors.sh")
-
-    # wait until all sensor readings have arrived
     timer = 0
-    expected_lines = expected_lines + len(devices)*number_of_readings_per_device
+    time.sleep(.05)
     print(expected_lines)
-    if (not all_sensor_data_arrived(expected_lines)):
-        print("not all sensor readings were received. Are you sure all photons are connected and initialized?")
-        exit(1)
+    while(int(os.popen("wc -l < sensor_info.txt").read()) != expected_lines):
+        time.sleep(1)
+        timer += 1
+        if (int(os.popen("wc -l <sensor_info.txt").read()) > expected_lines):
+            print("error: received too many sensor readings")
+            os.system(">sensor_info.txt")
+            return 0
+        elif(timer > 4):
+            print("error: received too few sensor readings")
+            os.system(">sensor_info.txt")
+            return 0
 
-    turnLEDoff()
+    os.system("cat sensor_info.txt >> all_data.txt")
+    os.system(">sensor_info.txt")
+    return 1
 
-parse_data.generateOutput()
+def initialize():
+    # start collecting colorinfo
+    start_sensor_data_listener()
+
+    # get rid of old intermediary files
+    os.system("rm -rf sensor_info.txt")
+    os.system("rm -rf all_data.txt")
+    turn_all_off()
+
+    # get information about photons
+    getActiveDevices()
+    getIds()
+    
+    os.system(">sensor_info.txt")
+
+def parse():
+    os.system("mv all_data.txt sensor_info.txt")
+    parse_data.generateOutput()
+    parse_data.debugger()
+    print("parsed data!")
 
 
-exit(0)
+if __name__ == "__main__":
+
+    initialize()
+    
+    expected_lines = number_of_readings_per_device*len(devices)
+
+    for device in devices:
+        device_id = device_ids[device]
+    
+        turnLEDon()
+
+        while(not capture_sensor_data(expected_lines)):
+            time.sleep(2)
+
+        turnLEDoff()
+
+        while (not capture_sensor_data(expected_lines)):
+            time.sleep(2)
+
+    parse()
+    exit(0)

@@ -1,17 +1,20 @@
+import os
 # the names of devices that are being used
 devices = []
+device_locations = ["A1", "A2", "A3", "B1", "B2", "B3", "C1", "C2", "C3"]
 # maps coreid to name ex: coreid = 2c002b001947353236343033 name = A0
 device_ids = dict()
 # maps coreid to the an ordered list of sensor readings (in order of time the reading was taken
 device_stats = dict()
 
-number_of_readings_per_device = 4
+number_of_readings_per_device = 8
 
 def getActiveDevices():
     active_file  = "src/main/config/active_photons.txt"
     file = open(active_file,"r")
     for line in file:
         devices.append(line[:-1])
+    print(devices)
 
 def matchNamestoID():
     id_file = "src/main/config/photon_ids.txt"
@@ -42,11 +45,37 @@ def parseRawSensorData():
 def formatSensorData():
     output_file = "output.txt"
     file = open(output_file,"w")
+    line = "     "
+    for device in device_locations:
+        line += device + "    "
+    line += "\n"
+    file.write(line)
+    for i in range(0,len(device_locations)):
+        line = "\n" + device_locations[i] + "   "
+        for j in range(0,number_of_readings_per_device):
+            if ( j == 4):
+                line = "\nbg   "
+            for device in devices:
+                num = device_stats[device_ids[device]][number_of_readings_per_device*i+j]
+                if(int(num) < 10):
+                    line += num + "     "
+                elif (int(num) < 100):
+                    line += num + "    "
+                else:
+                    line += num + "   "
+            line += "\n"
+            file.write(line)
+            line = "     "
+
+def formatSensorData_old():
+    output_file = "output.txt"
+    file = open(output_file,"w")
     light_sources = []
-    light_sources.append("bg")
+    #light_sources.append("bg")
     line = "    "
-    for device in devices:
-        light_sources.append(device)
+    light_sources.append("A1")
+    for device in device_locations:
+        #light_sources.append(device)
         line += device + "   "
     line += "\n"
     file.write(line)
@@ -68,34 +97,21 @@ def formatSensorData():
             #            line += "  "
         line += "\n"
         file.write(line)
-    file.close()
-
-# formats data in a long matrix
-# this is the old version of the above function
-def formatSensorDatalengthwise():
-    output_file = "output.txt"
-    file = open(output_file,"w")
-    line = "   "
-    line += "background    "
-    for device in devices:
-        line += device + "            "
-    line += "\n"
-    file.write(line)
-    for device in devices:
-        line = device + " "
-        reading_count = 0
-        for value in device_stats[device_ids[device]]:
-            line += value + "  "
-            reading_count += 1
-            if (reading_count == number_of_readings_per_device):
-                reading_count = 0
-                line += "  "
+        line += "bg  "
+        for j in range(number_of_readings_per_device,2*number_of_readings_per_device+1):
+            for device in devices:
+                line += (device_stats[device_ids[device]][number_of_readings_per_device*i+j]) + "  "
+            line += "\n"
+            file.write(line)
+            line = "    "
         line += "\n"
         file.write(line)
+
     file.close()
 
 
 def generateOutput():
+    os.system(">output.txt")
     matchNamestoID()
     getActiveDevices()
     parseRawSensorData()
@@ -110,3 +126,4 @@ def debugger():
 
 if __name__ == "__main__":
     generateOutput()
+    debugger()

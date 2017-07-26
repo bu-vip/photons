@@ -38,7 +38,7 @@ void captureSensor() {
   uint16_t TCS_clear, TCS_red, TCS_green, TCS_blue;
   for (int j = 0; j <= 3; j++) {
     tcs.setInterrupt(false);      // turn on LED
-    delay(60);  // takes 50ms to read
+    delay(300);  // takes 50ms to read
     tcs.getRawData(&TCS_red, &TCS_green, &TCS_blue, &TCS_clear);
     tcs.setInterrupt(true);  // turn off LED
 

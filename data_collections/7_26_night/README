@@ -1,0 +1,29 @@
+This folder contains data collection taken on July 26 2017 on the LTA testbed
+
+The data collection was taken in sets, each set with 4 trials.
+
+The sets are:
+- empty room 0 ambient lights off
+- empty room 0 ambient lights on 
+
+- object location 1 ambient lights off
+- object location 1 ambient lights on
+
+- empty room 1 ambient lights off
+- empty room 1 ambient lights on
+
+- object location 2 ambient lights off
+- object location 2 ambient lights on
+
+- empty room 2 ambient lights off
+- empty room 2 ambient lights on
+
+- object location 3 ambient lights off
+- object location 3 ambient lights on
+
+- empty room 3 ambient lights off
+- empty room 3 ambient lights on
+
+ All 3 objects are the same size but in different locations.
+
+ In each object directory, there is a dims.txt file that contains all the room dimensions (sensor positions, height, object placement, etc) with that set.

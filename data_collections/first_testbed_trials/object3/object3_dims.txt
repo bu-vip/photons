@@ -1,0 +1,38 @@
+NOTE: the origin is defined as the white board corner closest to the door
+Name: A1
+sensor: x = 70 y = 330 z = 675
+source: x = 110 y = 270 z = 675
+Name: A2
+sensor: x = 574 y = 330 z = 675
+source: x = 614 y = 270 z = 675
+Name: A3
+sensor: x = 1078 y = 330 z = 675
+source: x = 1118 y = 270 z = 675
+Name: B1
+sensor: x = 70 y = 940 z = 675
+source: x = 110 y = 880 z = 675
+Name: B2
+sensor: x = 574 y = 940 z = 675
+source: x = 614 y = 880 z = 675
+Name: B3
+sensor: x = 1078 y = 940 z = 675
+source: x = 1118 y = 880 z = 675
+Name: C1
+sensor: x = 70 y = 1550 z = 675
+source: x = 110 y = 1490 z = 675
+Name: C2
+sensor: x = 574 y = 1550 z = 675
+source: x = 614 y = 1490 z = 675
+Name: C3
+sensor: x = 1078 y = 1550 z = 675
+source: x = 1118 y = 1490 z = 675
+Floor Corners
+x = 0 y = 0 z = 0
+x = 1225 y = 0 z = 0
+x = 1225 y = 2238 z = 0
+x = 0 y = 2238 z = 0
+Object Corners
+x = 100 y = 1400 z = 0
+x = 100 y = 1911 z = 0
+x = 358 y = 1911 z = 0
+x = 358 y = 1400 z = 0

@@ -1,0 +1,30 @@
+This directory contains a data collection that occurred on July 26 2017 from 2-4pm on the LTA testbed
+
+This data has the following setting:
+- no fluorescent lights on
+- sunlight coming through the windows
+
+The data was collected in sets, each set contains 4 trials
+
+Each trial has:
+9 light sources listed in the first column
+9 sensors listed in the fist row
+Each time a light source turns on, we take 4 readings from each sensor
+Each time a light source turns off, we take 4 readings from each sensor (labeled "bg")
+
+The sets were taken in the following order:
+- empty room 0
+
+- object location 1
+- empty room 1
+
+- object location 2
+- empty room 2
+
+- object location 3
+- empty room 3
+
+NOTE: each trial has a filename with its timestamp. In general, trials were taken 1-4 mins apart and each trial occurs over the course of 70-75secs
+
+
+ In each object directory, there is a dims.txt file that contains all the room dimensions (sensor positions, height, object placement, etc) with that set.

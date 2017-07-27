@@ -1,0 +1,21 @@
+This folder contains the first set of data collection on the LTA testbed
+
+The data collection was taken in 8 sets, each set contains 4 trials.
+
+The 8 sets are:
+ - empty room, lights on
+ - empty room, lights off
+ 
+ - object1, lights on
+ - object1, lights off
+
+ - object 2, lights on
+ - object 2, lights off
+
+ - object 3, lights on
+ - object 3, lights off
+
+ All 3 objects are the same size but in different locations.
+
+ In each object directory, there is a dims.txt file that contains all the room dimensions (sensor positions, height, object placement, etc) with that set.
+

@@ -180,7 +180,7 @@ int main() {
   Floor f(global_origin, floor_width, floor_length);
   f.print();
 
-  Position object_position = Position(453,648,0);
+  Position object_position = Position(512,56,0);
   const int object_width = 258;
   const int object_height = 511;
   Object o(object_position, object_width, object_height);

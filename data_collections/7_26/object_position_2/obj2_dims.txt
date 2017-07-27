@@ -1,0 +1,37 @@
+Name: A1
+sensor: x = 70 y = 330 z = 702
+source: x = 110 y = 270 z = 702
+Name: A2
+sensor: x = 574 y = 330 z = 702
+source: x = 614 y = 270 z = 702
+Name: A3
+sensor: x = 1078 y = 330 z = 702
+source: x = 1118 y = 270 z = 702
+Name: B1
+sensor: x = 70 y = 940 z = 702
+source: x = 110 y = 880 z = 702
+Name: B2
+sensor: x = 574 y = 940 z = 702
+source: x = 614 y = 880 z = 702
+Name: B3
+sensor: x = 1078 y = 940 z = 702
+source: x = 1118 y = 880 z = 702
+Name: C1
+sensor: x = 70 y = 1550 z = 702
+source: x = 110 y = 1490 z = 702
+Name: C2
+sensor: x = 574 y = 1550 z = 702
+source: x = 614 y = 1490 z = 702
+Name: C3
+sensor: x = 1078 y = 1550 z = 702
+source: x = 1118 y = 1490 z = 702
+Floor Corners
+x = 0 y = 0 z = 0
+x = 1225 y = 0 z = 0
+x = 1225 y = 2238 z = 0
+x = 0 y = 2238 z = 0
+Object Corners
+x = 36 y = 116 z = 0
+x = 294 y = 116 z = 0
+x = 294 y = 627 z = 0
+x = 36 y = 627 z = 0

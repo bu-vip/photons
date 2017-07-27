@@ -8,6 +8,7 @@ expected_lines = 0
 
 devices = []
 device_ids = dict()
+device_id = ""
 
 def getActiveDevices():
     active_file  = "src/main/config/active_photons.txt"
@@ -63,7 +64,7 @@ def capture_sensor_data(expected_lines):
             os.system(">sensor_info.txt")
             return 0
 
-    os.system("cat sensor_info.txt >> all_data.txt")
+    os.system("cat sensor_info.txt >> raw_data.txt")
     os.system(">sensor_info.txt")
     return 1
 
@@ -73,7 +74,7 @@ def initialize():
 
     # get rid of old intermediary files
     os.system("rm -rf sensor_info.txt")
-    os.system("rm -rf all_data.txt")
+    os.system("rm -rf raw_data.txt")
     turn_all_off()
 
     # get information about photons
@@ -82,19 +83,18 @@ def initialize():
     
     os.system(">sensor_info.txt")
 
+    global expected_lines
+    expected_lines = number_of_readings_per_device*len(devices)
+
+
+
 def parse():
-    os.system("mv all_data.txt sensor_info.txt")
     parse_data.generateOutput()
     parse_data.debugger()
     print("parsed data!")
 
-
-if __name__ == "__main__":
-
-    initialize()
-    
-    expected_lines = number_of_readings_per_device*len(devices)
-
+def run_trial():
+    global device_id
     for device in devices:
         device_id = device_ids[device]
     
@@ -107,6 +107,13 @@ if __name__ == "__main__":
 
         while (not capture_sensor_data(expected_lines)):
             time.sleep(2)
+    
+if __name__ == "__main__":
+
+    initialize()
+
+    run_trial()
 
     parse()
+
     exit(0)

@@ -1,4 +1,6 @@
 import os
+import datetime
+
 # the names of devices that are being used
 devices = []
 device_locations = ["A1", "A2", "A3", "B1", "B2", "B3", "C1", "C2", "C3"]
@@ -9,14 +11,27 @@ device_stats = dict()
 
 number_of_readings_per_device = 8
 
-def getActiveDevices():
+output_file = ""
+
+def clean_up():
+    global device_ids
+    global device_stats
+    global devices
+    device_ids = dict()
+    device_stats = dict()
+    devices = []
+
+    os.system(">output.txt")
+
+def initialize():
+    clean_up()
+
     active_file  = "src/main/config/active_photons.txt"
     file = open(active_file,"r")
     for line in file:
         devices.append(line[:-1])
     print(devices)
 
-def matchNamestoID():
     id_file = "src/main/config/photon_ids.txt"
     file = open(id_file, "r")
     for line in file:
@@ -26,7 +41,7 @@ def matchNamestoID():
         device_ids[device_name] = core_id
 
 def parseRawSensorData():
-    file = "sensor_info.txt"
+    file = "raw_data.txt"
     f = open(file,"r")
     for line in f:
         if "lux" in line:
@@ -43,7 +58,9 @@ def parseRawSensorData():
 
 # this function takes the dictionary of lux values and creates a matrix
 def formatSensorData():
-    output_file = "output.txt"
+    date = datetime.datetime.now()
+    global output_file
+    output_file = str(date.hour) + "_" + str(date.minute) + "_output.txt"
     file = open(output_file,"w")
     line = "     "
     for device in device_locations:
@@ -68,7 +85,6 @@ def formatSensorData():
             line = "     "
 
 def formatSensorData_old():
-    output_file = "output.txt"
     file = open(output_file,"w")
     light_sources = []
     #light_sources.append("bg")
@@ -110,16 +126,14 @@ def formatSensorData_old():
     file.close()
 
 
+
 def generateOutput():
-    os.system(">output.txt")
-    matchNamestoID()
-    getActiveDevices()
+    initialize()
     parseRawSensorData()
     formatSensorData()
 
 # prints output.txt to command line
 def debugger():
-    output_file = "output.txt"
     file = open(output_file,"r")
     data = file.read()
     print(data)

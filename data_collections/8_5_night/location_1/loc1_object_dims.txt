@@ -1,0 +1,48 @@
+32X Object Dimensions
+Object Corners
+x = 861 y = 594.5 z = 0
+x = 1119 y = 594.5 z = 0
+x = 1119 y = 1105.5 z = 0
+x = 861 y = 1105.5 z = 0
+Object Center
+x = 990 y = 850 z = 0
+
+
+16X Object Dimensions
+Object Corners
+x = 861 y = 722.5 z = 0
+x = 1119 y = 722.5 z = 0
+x = 1119 y = 977.5 z = 0
+x = 861 y = 977.5 z = 0
+Object Center
+x = 990 y = 850 z = 0
+
+
+8X Object Dimensions
+Object Corners
+x = 926 y = 720 z = 0
+x = 1054 y = 720 z = 0
+x = 1054 y = 980 z = 0
+x = 926 y = 980 z = 0
+Object Center
+x = 990 y = 850 z = 0
+
+
+4X Object Dimensions
+Object Corners
+x = 926 y = 785 z = 0
+x = 1054 y = 785 z = 0
+x = 1054 y = 915 z = 0
+x = 926 y = 915 z = 0
+Object Center
+x = 990 y = 850 z = 0
+
+
+1X Object Dimensions
+Object Corners
+x = 974 y = 818 z = 0
+x = 1006 y = 818 z = 0
+x = 1006 y = 882 z = 0
+x = 974 y = 882 z = 0
+Object Center
+x = 990 y = 850 z = 0

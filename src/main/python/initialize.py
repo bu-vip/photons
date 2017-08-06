@@ -2,7 +2,7 @@ import os
 import time
 
 number_of_readings_per_device = 4
-photon_program = "src/main/photon-driver/"
+photon_program = "src/main/photon_driver/"
 
 devices = []
 device_ids = dict()

@@ -1,10 +1,10 @@
-# photon-code
+# photon_driver2
 
-A Particle project named photon-code
+A Particle project named photon_driver2
 
 ## Welcome to your project!
 
-Every new Particle project is composed of 3 important elements that you'll see have been created in your project directory for photon-code.
+Every new Particle project is composed of 3 important elements that you'll see have been created in your project directory for photon_driver2.
 
 #### ```/src``` folder:  
 This is the source folder that contains the firmware files for your project. It should *not* be renamed. 

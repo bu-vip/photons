@@ -1,0 +1,50 @@
+This folder contains data collection taken on August 4 2017 on the LTA testbed.
+
+The data collection was taken in sets, each set with 4 trials. A set is contained in a single .txt file. (NOTE: all 4 trials are in a single file unlike previous data collection formats.
+
+The purpose of this data collection was to determine the resolution of the testbed. This was done by using 6 different sized objects placed in 3 unique locations. 
+
+The objects are named according to their relative sizes (not exactly multiples of each other, just a rough approximation):
+1x
+4x
+8x
+16x
+32x
+64x - the original object used in previous experiments
+
+The sets were collected in the following order:
+
+- empty room 0
+- location 1
+    * 64x
+    * 32x
+    * 16x
+    * 8x
+    * 4x
+    * 1x
+- empty room 1
+- location 2
+    * 64x
+    * 32x
+    * 16x
+    * 8x
+    * 4x
+    * 1x
+- empty room 2
+- location 3
+    * 64x
+    * 32x
+    * 16x
+    * 8x
+    * 4x
+    * 1x
+- empty room 3
+
+In each directory, there is a file corresponding 
+
+
+Definitions
+--------------
+perturbation - turning a single light source on then off
+trial - 1 perturbation per light source for a total of 9 perturbations. Each time a light source is turned on OR off, all 9 sensors collect 4 readings. There are 9 sensors *(4 on + 4 off) = 72 sensor readings per trial.
+set - 4 consecutive trials

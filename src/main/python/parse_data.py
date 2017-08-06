@@ -1,37 +1,20 @@
 import os
 import datetime
 
-# the names of devices that are being used
-devices = []
-device_locations = ["A1", "A2", "A3", "B1", "B2", "B3", "C1", "C2", "C3"]
-# maps coreid to name ex: coreid = 2c002b001947353236343033 name = A0
 device_ids = dict()
-# maps coreid to the an ordered list of sensor readings (in order of time the reading was taken
 device_stats = dict()
-
+devices = []
 number_of_readings_per_device = 8
-
 output_file = ""
 
 def clean_up():
     global device_ids
     global device_stats
-    global devices
     device_ids = dict()
     device_stats = dict()
-    devices = []
 
-    os.system(">output.txt")
 
-def initialize():
-    clean_up()
-
-    active_file  = "src/main/config/active_photons.txt"
-    file = open(active_file,"r")
-    for line in file:
-        devices.append(line[:-1])
-    print(devices)
-
+def match_name_to_id():
     id_file = "src/main/config/photon_ids.txt"
     file = open(id_file, "r")
     for line in file:
@@ -40,103 +23,82 @@ def initialize():
         core_id = line[space+1:-1]
         device_ids[device_name] = core_id
 
-def parseRawSensorData():
-    file = "raw_data.txt"
-    f = open(file,"r")
-    for line in f:
-        if "lux" in line:
-            lux_value = line[(line.find("lux = ") + 6): line.find("\",\"ttl")]
-            core_id = line[(line.find("coreid\":")+ 9): line.find("\"}")]
-            if (core_id in device_stats):
+def parse_raw_data():
+    os.system("cat ACM*.txt > data.txt")
+    file = open("data.txt", "r")
+    for line in file:
+        if line[0].isdigit():
+            core_id = line[0:line.find(" ")]
+            lux_value = line[line.find(" ")+1:len(line)]
+            if core_id in device_stats:
                 lux_array = device_stats.get(core_id)
-                lux_array.append(lux_value)
+                lux_array.append(int(lux_value))
                 device_stats[core_id] = lux_array
             else:
                 lux_array = []
-                lux_array.append(lux_value)
+                lux_array.append(int(lux_value))
                 device_stats[core_id] = lux_array
 
-# this function takes the dictionary of lux values and creates a matrix
-def formatSensorData():
+def format_data():
+    # create ordered list of relevant device names
+    device_stats_keys = device_stats.keys()
+    devices_temp = []
+    for device_name in device_ids.keys():
+        if device_ids[device_name] in device_stats_keys:
+            devices_temp.append(device_name)
+    devices = sorted(devices_temp)
+
+
+    # generate output file name
     date = datetime.datetime.now()
     global output_file
     output_file = str(date.hour) + "_" + str(date.minute) + "_output.txt"
     file = open(output_file,"w")
-    line = "     "
-    for device in device_locations:
-        line += device + "    "
-    line += "\n"
-    file.write(line)
-    for i in range(0,len(device_locations)):
-        line = "\n" + device_locations[i] + "   "
-        for j in range(0,number_of_readings_per_device):
-            if ( j == 4):
-                line = "\nbg   "
-            for device in devices:
-                num = device_stats[device_ids[device]][number_of_readings_per_device*i+j]
-                if(int(num) < 10):
-                    line += num + "     "
-                elif (int(num) < 100):
-                    line += num + "    "
-                else:
-                    line += num + "   "
-            line += "\n"
-            file.write(line)
-            line = "     "
 
-def formatSensorData_old():
-    file = open(output_file,"w")
-    light_sources = []
-    #light_sources.append("bg")
-    line = "    "
-    light_sources.append("A1")
-    for device in device_locations:
-        #light_sources.append(device)
-        line += device + "   "
-    line += "\n"
-    file.write(line)
-    for i in range(0,len(light_sources)):
-        line = light_sources[i] + "  "
-        for j in range(0,number_of_readings_per_device):
-            for device in devices:
-                line += (device_stats[device_ids[device]][number_of_readings_per_device*i+j]) + "  "
-            line += "\n"
-            file.write(line)
-            line = "    "
-            #reading_count = 0
-            #if (device_ids[device] in device_stats.keys()): # check if the sensor is one of the active photons
-            #    for value in device_stats[device_ids[device]]:
-            #        line += value + " "
-            #        reading_count += 1
-            #        if (reading_count == number_of_readings_per_device):
-            #            reading_count = 0
-            #            line += "  "
+
+    current_trial = 0
+    vals_per_trial = number_of_readings_per_device*len(devices)
+    number_of_trials = len(device_stats[device_ids[devices[0]]]) / (vals_per_trial)
+    while(current_trial < number_of_trials):
+        line = "Trial #" +  str(current_trial + 1) + "-------------------------\n\n"
+        file.write(line)
+        # create name labels line
+        line = "     "
+        for device in devices:
+            line += device + "    "
         line += "\n"
         file.write(line)
-        line += "bg  "
-        for j in range(number_of_readings_per_device,2*number_of_readings_per_device+1):
-            for device in devices:
-                line += (device_stats[device_ids[device]][number_of_readings_per_device*i+j]) + "  "
-            line += "\n"
-            file.write(line)
-            line = "    "
-        line += "\n"
-        file.write(line)
+        for i in range(0,len(devices)):
+            line = "\n" + devices[i] + "   "
+            for j in range(0,number_of_readings_per_device):
+                if ( j == 4):
+                    line = "\nbg   "
+                for device in devices:
+                    num = device_stats[device_ids[device]][number_of_readings_per_device*i+j + current_trial*vals_per_trial]
+                    if(num < 10):
+                        line += str(num) + "     "
+                    elif (num < 100):
+                        line += str(num) + "    "
+                    else:
+                        line += str(num) + "   "
+                line += "\n"
+                file.write(line)
+                line = "     "
+        file.write("\n\n")
+        current_trial += 1
 
-    file.close()
-
-
-
-def generateOutput():
-    initialize()
-    parseRawSensorData()
-    formatSensorData()
 
 # prints output.txt to command line
 def debugger():
     file = open(output_file,"r")
     data = file.read()
     print(data)
+
+def generateOutput():
+    clean_up()
+    match_name_to_id()
+    parse_raw_data()
+    format_data()
 
 if __name__ == "__main__":
     generateOutput()

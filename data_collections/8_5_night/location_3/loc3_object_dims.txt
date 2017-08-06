@@ -1,0 +1,58 @@
+64X Object Dimensions
+Object Corners
+x = 441 y = 314.5 z = 0
+x = 699 y = 314.5 z = 0
+x = 699 y = 825.5 z = 0
+x = 441 y = 825.5 z = 0
+Object Center
+x = 570 y = 570 z = 0
+
+
+32X Object Dimensions
+Object Corners
+x = 441 y = 442.5 z = 0
+x = 699 y = 442.5 z = 0
+x = 699 y = 697.5 z = 0
+x = 441 y = 697.5 z = 0
+Object Center
+x = 570 y = 570 z = 0
+
+
+16X Object Dimensions
+Object Corners
+x = 505.5 y = 440 z = 0
+x = 634.5 y = 440 z = 0
+x = 634.5 y = 700 z = 0
+x = 505.5 y = 700 z = 0
+Object Center
+x = 570 y = 570 z = 0
+
+
+8X Object Dimensions
+Object Corners
+x = 505.5 y = 505 z = 0
+x = 634.5 y = 505 z = 0
+x = 634.5 y = 635 z = 0
+x = 505.5 y = 635 z = 0
+Object Center
+x = 570 y = 570 z = 0
+
+
+4X Object Dimensions
+Object Corners
+x = 538 y = 505.5 z = 0
+x = 602 y = 505.5 z = 0
+x = 602 y = 634.5 z = 0
+x = 538 y = 634.5 z = 0
+Object Center
+x = 570 y = 570 z = 0
+
+
+1X Object Dimensions
+Object Corners
+x = 554 y = 538 z = 0
+x = 586 y = 538 z = 0
+x = 586 y = 602 z = 0
+x = 554 y = 602 z = 0
+Object Center
+x = 570 y = 570 z = 0

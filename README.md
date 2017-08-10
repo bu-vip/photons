@@ -7,7 +7,7 @@ This system collects data from the Photon matrix. It can take data from any numb
 * [Particle CLI](https://www.particle.io/products/development-tools/particle-command-line-interface)
 
 ### Architecture:
-The system contains a local computer and an array of photons boards. Each photon board is flashed with a driver and communicates to the local computer using the [Particle Cloud](https://www.particle.io/products/platform/particle-cloud). The photons listen for certain events to execute commands such as "turn on LED" and posts data such as sensor readings to the Particle Cloud. The main program runs on your local computer. It is written in Python which calls individual bash scripts to communicate with the Photons boards through the Particle Cloud.
+The system contains a local computer and an array of photons boards. Each photon board is flashed with a driver and sends data to the local computer using a usb serial connection. The photons listen for certain events using the [Particle Cloud](https://www.particle.io/products/platform/particle-cloud) to execute commands such as "turn on LED" and "run trial". Using Bash scripts, the local publishes commands and then uses a Bash script and then a python parser to parse the sensor readings.
 
 ## First Time Use:
 1. Make sure the bash files are executable:
@@ -25,13 +25,37 @@ python src/main/python/initialize.py
 
 ## Usage:
 
-#### To run the program: 
+#### To initialize the sensor: 
 ```bash
 cd /path/to/photons/
-python src/main/python/controller.py
+./src/main/bash/publish_order_numbers.sh
 ```
-This command will generate a formatted data file named `output.txt`. A raw data file named `sensor_info.txt` is also generated, but is used only for debugging purposes.
-> NOTE: these file gets written over each time the controller is called, so be sure to copy this file over if it contains good data. 
+
+#### To run a trial:
+1. Make sure the usb serial port is open, the sensors are initialized, and run the log sensors script:
+```bash
+cd path/to/photons
+./src/main/bash/log_sensors.sh
+```
+This command will generate 9 raw data files named `ACM#.txt`. These files contain the outputs of each serial port and are necessary for parsing.
+> NOTE: these file gets written over each time the log_sensor.sh is called, so make sure to copy these files over if they contain good data that has not been parsed yet.
+2. Send the run_trial event to the photons over the cloud:
+```bash
+particle publish all_photons run_trial
+```
+3. Once the trial has completed, stop the log sensors script (Ctrl-C) and run the parser:
+```bash
+cd path/to/photons
+python src/main/python/parse_data.py
+```
+This command will generate a formatted data file named `timestamp_output.txt`. A raw data file named `data.txt` is also generated, but is used only for debugging purposes.
+> NOTE: these file gets written over each time the parser is called, so be sure to copy this file over if it contains good data. 
+
+#### To run 4 trials in succession:
+Follow the same format as above, but replace the "run_trial" event in instruction #2 for "run_4":
+```bash
+particle publish all_photons run_4
+```
 
 #### To re-flash the photons:
 ```bash

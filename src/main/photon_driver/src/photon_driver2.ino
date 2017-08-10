@@ -18,6 +18,7 @@ const std::string capture_sensors = "capture_sensor";
 const std::string ping = "ping";
 const std::string run_trial = "run_trial";
 const std::string run_4_trials = "run_4";
+const std::string run_trials_special = "run_trials_special";
 String id;
 
 // getCoreID was copied from the community forum user dermotos
@@ -107,6 +108,16 @@ void run4Trials() {
   }
 }
 
+void runTrials_special() {
+  tcs.setGain(TCS34725_GAIN_4X);
+  run4Trials();
+  tcs.setGain(TCS34725_GAIN_16X);
+  run4Trials();
+  tcs.setGain(TCS34725_GAIN_60X);
+  run4Trials();
+  tcs.setGain(TCS34725_GAIN_4X);
+}
+
 void cloudHandler(const char* event, const char* data) {
   const std::string str_event = std::string(event);
   const std::string str_data = std::string(data);
@@ -125,6 +136,9 @@ void cloudHandler(const char* event, const char* data) {
   } else if (!str_data.compare(run_4_trials)) {
     run4Trials();
     Particle.publish("error", "run_4 executed");
+  } else if (!str_data.compare(run_trials_special)) {
+    runTrials_special();
+    Particle.publish("error", "run_4_special executed");
   } else if (!str_event.compare(id) && atoi(str_data.c_str()) < 10) {
     trial_order_number = atoi(data) - 1;
     Particle.publish("error", "initialized order number");

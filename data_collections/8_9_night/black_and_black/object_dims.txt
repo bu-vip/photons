@@ -1,0 +1,71 @@
+Static Black Object Dimensions
+Object Corners
+x = 66 y = 840 z = 0
+x = 324 y = 840 z = 0
+x = 324 y = 1351 z = 0
+x = 66 y = 1351 z = 0
+Object Center
+x = 195 y = 1095.5 z = 0
+
+Orange Object Location 1 Dimensions
+Object Corners
+x = 901 y = 840 z = 0
+x = 1159 y = 840 z = 0
+x = 1159 y = 1351 z = 0
+x = 901 y = 1351 z = 0
+Object Center
+x = 1030 y = 1095.5 z = 0
+
+Orange Object Location 2 Dimensions
+Object Corners
+x = 614 y = 840 z = 0
+x = 872 y = 840 z = 0
+x = 872 y = 1351 z = 0
+x = 614 y = 1351 z = 0
+Object Center
+x = 743 y = 1095.5 z = 0
+
+Black Object Location 3 Dimensions
+Object Corners
+x = 509 y = 840 z = 0
+x = 767 y = 840 z = 0
+x = 767 y = 1351 z = 0
+x = 509 y = 1351 z = 0
+Object Center
+x = 638 y = 1095.5 z = 0
+
+Black Object Location 4 Dimensions
+Object Corners
+x = 462 y = 840 z = 0
+x = 720 y = 840 z = 0
+x = 720 y = 1351 z = 0
+x = 462 y = 1351 z = 0
+Object Center
+x = 591 y = 1095.5 z = 0
+
+Black Object Location 5 Dimensions
+Object Corners
+x = 396 y = 840 z = 0
+x = 654 y = 840 z = 0
+x = 654 y = 1351 z = 0
+x = 396 y = 1351 z = 0
+Object Center
+x = 525 y = 1095.5 z = 0
+
+Black Object Location 6 Dimensions
+Object Corners
+x = 324 y = 840 z = 0
+x = 582 y = 840 z = 0
+x = 582 y = 1351 z = 0
+x = 324 y = 1351 z = 0
+Object Center
+x = 453 y = 1095.5 z = 0
+
+Black Object Location 7 Dimensions
+Object Corners
+x = 194 y = 840 z = 0
+x = 452 y = 840 z = 0
+x = 452 y = 1351 z = 0
+x = 194 y = 1351 z = 0
+Object Center
+x = 323 y = 1095.5 z = 0

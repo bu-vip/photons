@@ -1,7 +1,7 @@
 #include "testbed_dimensions.h"
 
 int main() {
-  Position center = Position(570,570,0);
+  Position center = Position(990,850,0);
 
   std::cout << "64X Object Dimensions\n";
   const int object1_width = 258;

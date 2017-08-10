@@ -1,0 +1,28 @@
+64X Object Dimensions
+Object Corners
+x = 842 y = 531 z = 0
+x = 1100 y = 531 z = 0
+x = 1100 y = 1042 z = 0
+x = 842 y = 1042 z = 0
+Object Center
+x = 971 y = 786.5 z = 0
+
+
+4X Object Dimensions
+Object Corners
+x = 939 y = 722 z = 0
+x = 1003 y = 722 z = 0
+x = 1003 y = 851 z = 0
+x = 939 y = 851 z = 0
+Object Center
+x = 971 y = 786.5 z = 0
+
+
+1X Object Dimensions
+Object Corners
+x = 955 y = 754.5 z = 0
+x = 987 y = 754.5 z = 0
+x = 987 y = 818.5 z = 0
+x = 955 y = 818.5 z = 0
+Object Center
+x = 971 y = 786.5 z = 0

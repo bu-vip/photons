@@ -1,0 +1,38 @@
+This folder contains data collection taken on August 9 2017 on the LTA testbed.
+
+The data collection was taken in sets, each set with 4 trials. A set is contained in a single .txt file.
+
+
+The purpose of this data collection was to test results using more than one object.
+In each experiment there are 2 objects, a static object and a dynamic object. The static object is always black, while the dynamic object is either orange or black depending on which experiment. The dynamic object is placed at different locations closer and closer to the object until they touch and then intersect.
+
+The sets were collected in the following order:
+
+- empty room 0
+- just black static object (for both experiments)
+- black and orange objects
+    * location 1
+    * location 2
+    * location 3
+    * location 4
+    * location 5
+    * location 6 (objects touching)
+    * location 7 (objects intersecting)
+- black and black objects
+    * location 1
+    * location 2
+    * location 3
+    * location 4
+    * location 5
+    * location 6 (objects touching)
+- empty room 1
+- empty room 2
+
+In each directory, there is an object_dims.txt which contains the locations of each object.
+
+Definitions
+--------------
+perturbation - turning a single light source on then off
+trial - 1 perturbation per light source for a total of 9 perturbations. Each time a light source is turned on OR off, all 9 sensors collect 4 readings. There are 9 sensors *(4 on + 4 off) = 72 sensor readings per trial.
+set - 4 consecutive trials
+

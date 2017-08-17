@@ -37,7 +37,7 @@ cd /path/to/photons/
 cd path/to/photons
 ./src/main/bash/log_sensors.sh
 ```
-This command will generate 9 raw data files named `ACM#.txt`. These files contain the outputs of each serial port and are necessary for parsing.
+This command will generate 9 raw data files named `ACM#.txt` corresponding to each serial port connection. These files contain the outputs of each serial port and are necessary for parsing.
 > NOTE: these file gets written over each time the log_sensor.sh is called, so make sure to copy these files over if they contain good data that has not been parsed yet.
 2. Send the run_trial event to the photons over the cloud:
 ```bash

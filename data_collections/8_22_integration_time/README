@@ -1,0 +1,40 @@
+This folder contains a data collection taken on August 22, 2017.
+
+The goal of this experiment was to test various integration times.
+
+The integration times tested are:
+- 2.4ms
+- 24ms
+- 50ms
+- 101ms
+- 154ms
+- 700ms
+
+The gain was set to the default 4x gain. 
+
+The experiments were conducted with daylight ambient lighting and a blue led was accidentally left uncovered just above the testbed (the "on" light on usb hub).
+
+The data sets were taken in the following order:
+- empty room 0
+  - 2.4ms
+  - 24ms
+  - 50ms
+  - 101ms
+  - 154ms
+  - 700ms
+- object location 1
+  - 2.4ms
+  - 24ms
+  - 50ms
+  - 101ms
+  - 154ms
+  - 700ms
+- empty room 1
+  - 2.4ms
+  - 24ms
+  - 50ms
+  - 101ms
+  - 154ms
+  - 700ms
+
+Same formatting as always.

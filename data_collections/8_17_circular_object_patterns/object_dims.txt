@@ -1,0 +1,5 @@
+Object Location Dimensions
+Object Center
+x = 679 y = 897 z = 0
+Object Radius
+r = 133

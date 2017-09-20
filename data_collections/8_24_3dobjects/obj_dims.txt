@@ -1,0 +1,51 @@
+
+Flat Object Location 1 Dimensions
+Object Corners
+x = 860 y = 758 z = 0
+x = 1088 y = 758 z = 0
+x = 1088 y = 1181 z = 0
+x = 860 y = 1181 z = 0
+Object Center
+x = 974 y = 969.5 z = 0
+3D Object Location 1 Dimensions
+Object Corners
+x = 860 y = 758 z = 109
+x = 1088 y = 758 z = 109
+x = 1088 y = 1181 z = 109
+x = 860 y = 1181 z = 109
+Object Center
+x = 974 y = 969.5 z = 54.5
+
+Flat Object Location 2 Dimensions
+Object Corners
+x = 635 y = 454 z = 0
+x = 863 y = 454 z = 0
+x = 863 y = 877 z = 0
+x = 635 y = 877 z = 0
+Object Center
+x = 749 y = 665.5 z = 0
+3D Object Location 2 Dimensions
+Object Corners
+x = 635 y = 454 z = 109
+x = 863 y = 454 z = 109
+x = 863 y = 877 z = 109
+x = 635 y = 877 z = 109
+Object Center
+x = 749 y = 665.5 z = 54.5
+
+Flat Object Location 3 Dimensions
+Object Corners
+x = 47 y = 265 z = 0
+x = 275 y = 265 z = 0
+x = 275 y = 688 z = 0
+x = 47 y = 688 z = 0
+Object Center
+x = 161 y = 476.5 z = 0
+3D Object Location 3 Dimensions
+Object Corners
+x = 47 y = 265 z = 109
+x = 275 y = 265 z = 109
+x = 275 y = 688 z = 109
+x = 47 y = 688 z = 109
+Object Center
+x = 161 y = 476.5 z = 54.5

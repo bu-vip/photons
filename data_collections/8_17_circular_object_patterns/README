@@ -1,0 +1,20 @@
+This folder contains a data collection taken on August 17, 2017 on the LTA testbed.
+
+The goal of this experiment was to test object object patterns and albedos. 
+
+5 circular objects with r = 133cm were placed in the same position:
+- black
+- florentine
+- cactus
+- reflective blue
+- transparent teal
+
+The data sets were collected in the following order:
+- empty room 0
+- black
+- reflective blue
+- cactus
+- florentine
+- transparent teal
+- empty room 1
+

@@ -1,0 +1,22 @@
+This folder contains a data collection taken on August 28, 2017 on the LTA testbed.
+
+The purpose of this experiment was to take a 3d box with the same dimensions as the original black object and compare the localization accuracy of the two.
+
+There are two objects:
+- The 3d object
+- The original flat black object
+
+The sets were taken in the following order:
+- empty room 0
+- location 1
+    * flat object
+    * 3d object
+- empty room 1
+- location 2
+    * flat object
+    * 3d object
+- empty room 2
+- location 3
+    * flat object
+    * 3d object
+- empty room 3

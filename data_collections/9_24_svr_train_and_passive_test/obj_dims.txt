@@ -1,0 +1,16 @@
+Location 1 Corners
+x = 908 y = 372 z = 0
+x = 1166 y = 372 z = 0
+x = 1166 y = 883 z = 0
+x = 908 y = 883 z = 0
+Location 2 Corners
+x = 36 y = 116 z = 0
+x = 294 y = 116 z = 0
+x = 294 y = 627 z = 0
+x = 36 y = 627 z = 0
+Location 3 Corners
+x = 453 y = 648 z = 0
+x = 711 y = 648 z = 0
+x = 711 y = 1159 z = 0
+x = 453 y = 1159 z = 0
+

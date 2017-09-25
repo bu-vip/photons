@@ -1,0 +1,172 @@
+this folder contains a data collection taken on September 24, 2017 on the LTA testbed.
+
+The purpose of this data collection was to collect data for passive sensing and a training set for SVR.
+
+NOTE: object locations 1,2,3 are identical to the object locations chosen on 7/26. These are intended to be used as testing labels in SVR.
+
+The sets were taken in the following order:
+
+- empty room 0
+- x11
+  - lights on
+      - active
+      - passive
+  - lights off (dark)
+      - active
+      - passive
+- x12
+  - lights on
+      - active
+      - passive
+  - lights off (dark)
+      - active
+      - passive
+- x13
+  - lights on
+      - active
+      - passive
+  - lights off (dark)
+      - active
+      - passive
+- x14
+  - lights on
+      - active
+      - passive
+  - lights off (dark)
+      - active
+      - passive
+- x15
+  - lights on
+      - active
+      - passive
+  - lights off (dark)
+      - active
+      - passive
+- x21
+  - lights on
+      - active
+      - passive
+  - lights off (dark)
+      - active
+      - passive
+- x22
+  - lights on
+      - active
+      - passive
+  - lights off (dark)
+      - active
+      - passive
+- x23
+  - lights on
+      - active
+      - passive
+  - lights off (dark)
+      - active
+      - passive
+- x24
+  - lights on
+      - active
+      - passive
+  - lights off (dark)
+      - active
+      - passive
+- x25
+  - lights on
+      - active
+      - passive
+  - lights off (dark)
+      - active
+- x31
+  - lights on
+      - active
+      - passive
+  - lights off (dark)
+      - active
+      - passive
+- x32
+  - lights on
+      - active
+      - passive
+  - lights off (dark)
+      - active
+      - passive
+- x33
+  - lights on
+      - active
+      - passive
+  - lights off (dark)
+      - active
+      - passive
+- x34
+  - lights on
+      - active
+      - passive
+  - lights off (dark)
+      - active
+      - passive
+- x35
+  - lights on
+      - active
+      - passive
+  - lights off (dark)
+      - active
+      - passive
+      - passive
+- x41
+  - lights on
+      - active
+      - passive
+  - lights off (dark)
+      - active
+      - passive
+- x42
+  - lights on
+      - active
+      - passive
+  - lights off (dark)
+      - active
+      - passive
+- x43
+  - lights on
+      - active
+      - passive
+  - lights off (dark)
+      - active
+      - passive
+- x44
+  - lights on
+      - active
+      - passive
+  - lights off (dark)
+      - active
+      - passive
+- x45
+  - lights on
+      - active
+      - passive
+  - lights off (dark)
+      - active
+      - passive
+- empty room 1
+- location 1
+  - lights on
+      - active
+      - passive
+  - lights off (dark)
+      - active
+      - passive
+- location 2
+  - lights on
+      - active
+      - passive
+  - lights off (dark)
+      - active
+      - passive
+- location 3
+  - lights on
+      - active
+      - passive
+  - lights off (dark)
+      - active
+      - passive
+- empty room 2   

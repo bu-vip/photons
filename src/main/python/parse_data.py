@@ -1,6 +1,7 @@
 import os
 import datetime
 import numpy as np
+import sys
 
 device_ids = dict()
 device_stats = dict()
@@ -25,8 +26,8 @@ def match_name_to_id():
         device_ids[device_name] = core_id
 
 def parse_raw_data():
-    os.system("cat ACM*.txt > data.txt")
-    file = open("data.txt", "r")
+    os.system("cat ACM*.txt > my_data.txt")
+    file = open("my_data.txt", "r")
     for line in file:
         if line[0].isdigit():
             core_id = line[0:line.find(" ")]
@@ -39,7 +40,6 @@ def parse_raw_data():
                 lux_array = []
                 lux_array.append(int(lux_value))
                 device_stats[core_id] = lux_array
-
 def file_format():
     # create ordered list of relevant device names
     device_stats_keys = device_stats.keys()
@@ -53,7 +53,7 @@ def file_format():
     # generate output file name
     date = datetime.datetime.now()
     global output_file
-    output_file = str(date.hour) + "_" + str(date.minute) + "_output.txt"
+    output_file = "output.txt"
     file = open(output_file,"w")
 
 
@@ -87,6 +87,43 @@ def file_format():
                 line = "     "
         file.write("\n\n")
         current_trial += 1
+
+def file_format_passive():
+    # create ordered list of relevant device names
+    device_stats_keys = device_stats.keys()
+    devices_temp = []
+    for device_name in device_ids.keys():
+        if device_ids[device_name] in device_stats_keys:
+            devices_temp.append(device_name)
+    devices = sorted(devices_temp)
+
+
+    global output_file
+    output_file = "output.txt"
+    file = open(output_file,"w")
+
+
+    line = "     "
+    for device in devices:
+        line += device + "    "
+    line += "\n"
+    file.write(line)
+    line = "\n" + "On" + "   "
+    for j in range(0,number_of_readings_per_device*2):
+        if ( j == 4):
+            line = "\nOff  "
+        for device in devices:
+            num = device_stats[device_ids[device]][j]
+            if(num < 10):
+                line += str(num) + "     "
+            elif (num < 100):
+                line += str(num) + "    "
+            else:
+                line += str(num) + "   "
+        line += "\n"
+        file.write(line)
+        line = "     "
+    file.write("\n")
 
 def LTM_format():
     # create ordered list of relevant device names
@@ -130,7 +167,13 @@ def generateOutput():
     clean_up()
     match_name_to_id()
     parse_raw_data()
-    file_format()
+    try:
+        if (sys.argv[1] == "passive"):
+            file_format_passive()
+        else:
+            file_format()
+    except IndexError:
+        file_format()
 
 if __name__ == "__main__":
     generateOutput()

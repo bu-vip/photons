@@ -168,7 +168,7 @@ class Object {
       corner_two = corner_two + origin;
       corner_three = Position(0, length, 0);
       corner_three = corner_three + origin;
-      center = origin +  Position(width/2,length/2,0);
+      center = origin +  Position(width/2,length/2, (-1)*origin.getZ()/2);
     }
     void print() {
       std::cout << "Object Corners\n";
@@ -196,5 +196,5 @@ class Object {
 };
 
 Position compute_origin_from_center(float width, float height, Position center) {
-  return center - Position(width/2, height/2, 0);
+  return center - Position(width/2, height/2, center.getZ()/2);
 }

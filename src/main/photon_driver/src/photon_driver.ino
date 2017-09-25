@@ -18,7 +18,7 @@ const std::string capture_sensors = "capture_sensor";
 const std::string ping = "ping";
 const std::string run_trial = "run_trial";
 const std::string run_4_trials = "run_4";
-const std::string run_trials_special = "run_trials_special";
+const std::string run_pass = "run_passive";
 String id;
 
 // getCoreID was copied from the community forum user dermotos
@@ -102,20 +102,19 @@ void runTrial() {
   }
 }
 
+void run_passive() {
+  ledOn("");
+  delay(50);
+  captureSensor("");
+  ledOff("");
+  delay(50);
+  captureSensor("");
+}
+
 void run4Trials() {
   for (int i = 0; i < 4; i++) {
     runTrial();
   }
-}
-
-void runTrials_special() {
-  tcs.setGain(TCS34725_GAIN_4X);
-  run4Trials();
-  tcs.setGain(TCS34725_GAIN_16X);
-  run4Trials();
-  tcs.setGain(TCS34725_GAIN_60X);
-  run4Trials();
-  tcs.setGain(TCS34725_GAIN_4X);
 }
 
 void cloudHandler(const char* event, const char* data) {
@@ -133,12 +132,12 @@ void cloudHandler(const char* event, const char* data) {
   } else if (!str_data.compare(run_trial)) {
     runTrial();
     Particle.publish("error", "run_trial executed");
+  } else if (!str_data.compare(run_pass)) {
+    run_passive();
+    Particle.publish("error", "run_passive executed");
   } else if (!str_data.compare(run_4_trials)) {
     run4Trials();
     Particle.publish("error", "run_4 executed");
-  } else if (!str_data.compare(run_trials_special)) {
-    runTrials_special();
-    Particle.publish("error", "run_4_special executed");
   } else if (!str_event.compare(id) && atoi(str_data.c_str()) < 10) {
     trial_order_number = atoi(data) - 1;
     Particle.publish("error", "initialized order number");
